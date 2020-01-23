@@ -8,7 +8,7 @@ from io import BytesIO
 from fastai import *
 from fastai.vision import *
 
-model_file_url = 'https://drive.google.com/open?id=GAk6RalKbvWbk4x3MT4v4f-YrJOFkzLN'
+model_file_url = 'http://naver.me/xotkal3V'
 model_file_name = 'stage-2'
 classes = ['dodge_challenger', 'hyundai_elantra', 'nissan_versa']
 path = Path(__file__).parent
@@ -28,6 +28,7 @@ async def setup_learner():
     await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
     data_bunch = ImageDataBunch.single_from_classes(path, classes,
         ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
+   
     learn = cnn_learner(data_bunch, models.resnet34, pretrained=False)
     learn.load(model_file_name)
     return learn
